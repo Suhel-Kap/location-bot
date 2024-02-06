@@ -13,8 +13,8 @@ export default function handler(
   const bot = process.env.TELEGRAM_TOKEN;
   const api = `https://api.telegram.org/bot${bot}`;
   const chatId = process.env.CHAT_ID;
-  console.log(api, chatId);
   const { data } = req.body;
+  console.log(data);
   axios
     .post(`${api}/sendMessage`, {
       chat_id: "-4152348122",
